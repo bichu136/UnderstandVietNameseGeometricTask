@@ -1,81 +1,71 @@
 import sys
 import flashtext
 import re,string
-input = sys.argv[1]
-
-#create a Dictionary
-
-keywordProcessor = flashtext.KeywordProcessor()
-keywordProcessor.add_keyword("của","OF")
-keywordProcessor.add_keyword("thuộc","OF")
-keywordProcessor.add_keyword("là","BE")
-keywordProcessor.add_keyword("và","AND")
-keywordProcessor.add_keyword(",","AND")
-keywordProcessor.add_keyword("bằng","EQUAL")
-keywordProcessor.add_keyword("=","EQUAL")
-keywordProcessor.add_keyword("cm","X")
-keywordProcessor.add_keyword("độ","X")
-
-ignore = flashtext.KeywordProcessor()
-f = open("verb.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"VERB")
-    ignore.add_keyword(t,"VERB")
+def BeforeParser(task):
+    #create a Dictionary
+    
+    keywordProcessor = flashtext.KeywordProcessor()
+    keywordProcessor.add_keyword("của","OF")
+    keywordProcessor.add_keyword("thuộc","OF")
+    keywordProcessor.add_keyword("là","BE")
+    keywordProcessor.add_keyword("và","AND")
+    keywordProcessor.add_keyword(",","AND")
+    keywordProcessor.add_keyword("bằng","EQUAL")
+    keywordProcessor.add_keyword("=","EQUAL")
+    keywordProcessor.add_keyword("cm","X")
+    keywordProcessor.add_keyword("độ","X")
+    
+    ignore = flashtext.KeywordProcessor()
+    f = open("verb.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-f = open("keywords.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"SHAPE")
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"VERB")
+        ignore.add_keyword(t,"VERB")
+        t = f.readline().strip()
+    f.close()
+    f = open("keywords.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-
-f = open("pre-Q.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"Q-")
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"SHAPE")
+        t = f.readline().strip()
+    f.close()
+    
+    f = open("pre-Q.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-f = open("pos-Q.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"-Q")
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"Q-")
+        t = f.readline().strip()
+    f.close()
+    f = open("pos-Q.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-f = open("adj.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"ADJ")
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"-Q")
+        t = f.readline().strip()
+    f.close()
+    f = open("adj.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-
-
-f = open("keywords2.txt",encoding='UTF-8')
-t = f.readline().strip()
-while(t!=""):
-    keywordProcessor.add_keyword(t,"DECOR")
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"ADJ")
+        t = f.readline().strip()
+    f.close()
+    
+    
+    f = open("keywords2.txt",encoding='UTF-8')
     t = f.readline().strip()
-f.close()
-#open file and split words
-f = open(input,encoding='UTF-8')
-t = f.read()
-task = t.split("^")
-a=0
-while a<len(task):
-    r = 0
-    print(task[a])
+    while(t!=""):
+        keywordProcessor.add_keyword(t,"DECOR")
+        t = f.readline().strip()
+    f.close()
+    #open file and split words
     punc = '''!()[]{};:'"\,<>./?@#$%^&*_~'''
-    for char in task[a]:
+    for char in task:
         if char in punc:
-            task[a] = task[a].replace(char,"")
-    ignore_found = ignore.extract_keywords(task[a].lower(),span_info=True)
+            task = task.replace(char,"")
+    ignore_found = ignore.extract_keywords(task.lower(),span_info=True)
     offset = 0
-    print(task[a])
-    key_found = keywordProcessor.extract_keywords(task[a].lower(), span_info=True)
-    splitted = [task[a]]
+    key_found = keywordProcessor.extract_keywords(task.lower(), span_info=True)
+    splitted = [task]
     l = 0
-
     for key,begin,end in key_found:
         k = splitted[-1]
         splitted.pop()
@@ -109,7 +99,6 @@ while a<len(task):
 
         i+=1
     #delete unecessary \n
-    print(splitted)
     for str in splitted:
         k = keywordProcessor.replace_keywords(str)
         if k.isnumeric():
@@ -118,9 +107,5 @@ while a<len(task):
             splitted_keyword.append("ID")
         else:
             splitted_keyword.append(k)
-
-
-    print(splitted_keyword)
-    a+=1
-f.close()
-#-----------PARSE REQUIRED------------#
+    return splitted,splitted_keyword
+    #-----------PARSE REQUIRED------------#

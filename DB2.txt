@@ -1,5 +1,3 @@
-
-^
 Cho góc bẹt xOy. Vẽ tia Oz sao cho góc xOz = 70
 Tính góc zOy?
 ^
