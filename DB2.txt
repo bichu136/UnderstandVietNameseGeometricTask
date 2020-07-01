@@ -1,0 +1,18 @@
+
+^
+Cho góc bẹt xOy. Vẽ tia Oz sao cho góc xOz = 70
+Tính góc zOy?
+^
+Cho 2 góc kề bù xOy và yOy’, trong đó xOy = 110; Oz là tia phân giác của góc yOy’
+Số đo góc yOz bằng
+
+^
+Cho đoạn thẳng AB = 6cm và O là trung điểm của AB. Gọi M là điểm thuộc đoạn AB.
+Tính độ dài các đoạn AM, BM biết OM = 1cm
+^
+vẽ tam giác ABC biết A = 60 AB = 2 cm ; AC = 4 cm
+Gọi D là điểm thuộc AC sao cho CD = 3cm tính AD
+^
+Cho 2 góc kề bù xOy và yOz. kẻ tia phân giác Ou của góc xOy và tia phân giác Ov của góc yOz.
+Hỏi góc uOv là góc gì ? vì sao?
+

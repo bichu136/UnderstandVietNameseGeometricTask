@@ -1,8 +1,21 @@
-đường cao
-đường tiếp tuyến
+cao
+tiếp tuyến
 trung điểm
-đường trung trực
-đường trung tuyến
-tia phân giác
-đường phân giác
-tâm
+trung trực
+trung tuyến
+phân giác
+kề bù
+bù nhau
+phụ nhau
+kề phụ
+kề
+tù
+bẹt
+nhọn
+nhọn
+vuông
+cân
+đều
+vuông cân
+thẳng hàng
+không thẳng hàng
